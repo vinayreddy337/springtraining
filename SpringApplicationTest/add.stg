@@ -1,3 +1,0 @@
-add_result(result)::=<<
-    Result is:$result$
->>
