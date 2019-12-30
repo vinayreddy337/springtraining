@@ -1,0 +1,102 @@
+
+	Spring--->IOC(Inversion of control)
+
+	we need not create objects.
+	Spring Container creates and managesobjects in a container which is iside JVM called as IOC container.
+	we just need to specify the object(bean) name in a xml file.(beans.xml).
+	Spring reads the xml file and creates objects calles as beans and stores them in IOC container.
+	The main advatage of spring is it is used to provide loose coupling between objects and also provides dependency injection.
+
+	Spring has its own container called IOC container
+	  we need to provide a config file (,xml) to the Ioc container as input and the container will create the objects for you.
+	  There are two types of Spring IOC conrtainers(interfaces)
+	  1.BeanFactory-->not used at present
+	  2.ApplicationCOntext
+	Spring is mainly used for reducing tight coupling in an application.
+	Tight coupling is when there is a dependency of one object with another object or one module with another module..In java if we want to access the methods of a particular class we need to create an object of that class or else we cannot access it.This is tight coupling.
+	This can be eliminated by using Springs concept of dependency injection.
+
+
+
+
+	SpringBoot:
+	----------
+	Spring Boot provides a good platform for Java developers to develop a stand-alone and production-grade spring application that you can just run. You can get started with minimum configurations without the need for an entire Spring configuration setup.
+	It provides a flexible way to configure Java Beans, XML configurations, and Database Transactions.
+	
+	It provides a powerful batch processing and manages REST endpoints.
+
+	In Spring Boot, everything is auto configured; no manual configurations are needed.
+
+	It offers annotation-based spring application
+
+	Eases dependency management
+
+	It includes Embedded Servlet Container
+
+	The entry point of the spring boot application is the class contains @SpringBootApplication annotation and the main method.
+
+
+
+
+	Spring annotations:
+	------------------
+	1.@SpringBootApplcation--used to launch a spring boot application along with the main method.It is a combination of 
+	@EnableAutoConfiguration @ComponentScan and @Configuration
+	Ways of defining it:
+	-->@SpringBootApplication
+	-->@SpringBootApplication(exclude={classes which need not be scanned})
+	-->@SpringBootApplication(scanBasePackages = {"test", "com.modak"}) --equivalent to component scan.Scans for components in the order of packages metioned in {}.
+        If no package is specified spring scans for the components specified in the package where the main class resides.	
+-
+	1.@Component(bean_name)-- class containing this annotation ,spring creates a bean(object) for that class and stores it inside the spring IOC container.
+
+	2.@ComponentScan({one or many} )-- spring scans for the @component enabled classes present inside the package specified .Default Component scan is done on the package where the main function resides.
+
+	3.@Configuration--spring considers this class as configuration class and creates  a bean of this class first .It is same as that of beans.xml but java version.Use componentscan along with  configuration.It is a class containing deifferent beans .
+
+	4.@Bean-- To tell spring that that particular method returns a an object .
+
+	5.@Autowired--if we want to do Dependency injection we must use Autowired annotation
+
+	6.@value-- specify the name of the bean.
+
+	7.@primary-- to make any implementation class primary for dependency injection we must use @Primary
+
+	8.@Qualifier(bean name)-- used along with Autowired to pic one among multiple implementations for any interface.Assining a bean to a variable.
+
+	10.@RestController-used for creating a controller for managing api requests.
+
+	11.@RequestMapping(value="endpoint")--maps the request with the method defined .
+	
+	12.@Lazy--used to lazily call the bean or variable (i.e..,) initialised only on request.
+	
+	13.@Postconstruct-- execute that method without even calling it  .Should be first executed as and when a bean is initialised for that class and is executed only once.
+	
+	14.@Predestroy--execute the method as and when the application context is closed.used for cleanup
+	
+	15.@CrossOrigin--allows requests from any port for processing.
+
+	16.@PathVariable--gets the value of the variable from the request
+	
+	17.@RequestBody--get the body from the input request.Used for Post requests.
+	
+	18.@Dependson("other bean")-- used to determine the dependency between beans i.e.,the order of bean initialization. This annotation is directly used on any class or indirectly annotated with @Component or on methods annotated with @Bean.
+	
+
+
+
+	When a spring application is started the following things happen:
+	================================================================
+	1.The SpringApllication .run () is executed which inturn kicks of Application context ,which inturn searches for the class annotated with @Configuration ,since Application context is the IOC container which seeks configurations (beans.xml or class annotated with @configuration) for initializing the beans(annotated with @component,@service,@RestController) and storinfg them inside a container called IOC container.
+	
+	We can get the bean of any class using the applicationcontext by autowiring it.
+	
+	2.After all the beans are initialised, it automatially intializes dispatcher servlet (front controller) and registers all the mappings and some basic things for the appplication to run.
+	
+	3.Tomcat is initialised and adds it to the context,so that it is embeded with spring.
+
+
+	4.After the above changes tha spring application is ready to be used.
+
+        5.Now your spring application is ready to be executed.
